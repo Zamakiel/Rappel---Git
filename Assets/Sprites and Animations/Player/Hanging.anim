@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player - Falling
+  m_Name: Hanging
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,7 +21,7 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -3082710827640903242, guid: 0d671317e1731c24fa0bc398d249b310, type: 3}
+      value: {fileID: -6085846537427352159, guid: 03f880140e3851a418b97a12125feb4a, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,7 +44,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -3082710827640903242, guid: 0d671317e1731c24fa0bc398d249b310, type: 3}
+    - {fileID: -6085846537427352159, guid: 03f880140e3851a418b97a12125feb4a, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
