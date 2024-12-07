@@ -4,17 +4,7 @@ using UnityEngine.InputSystem;
 
 public class StateManagerScript : MonoBehaviour
 {
-    //Lazy singleton
-    private static readonly Lazy<StateManagerScript> lazy =
-       new Lazy<StateManagerScript>(() => new StateManagerScript());
-
-    public static StateManagerScript s_instance
-    {
-        get
-        {
-            return lazy.Value;
-        }
-    }
+    public static StateManagerScript s_instance;
 
     [SerializeField]
     GameObject m_playerManager;
@@ -29,9 +19,18 @@ public class StateManagerScript : MonoBehaviour
 
     void Awake()
     {
+        if (s_instance != null && s_instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            s_instance = this;
+        }
+
         m_playerManager.AddComponent<PlayerScript>();
         m_inputManager.AddComponent<InputReaderScript>();
-        
+
         Debug.Log(this.GetType().ToString() + " Initialized!");
     }
 

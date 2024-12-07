@@ -5,25 +5,23 @@ using UnityEngine;
 
 public class InputReaderScript : MonoBehaviour
 {
-    //Lazy singleton
-    private static readonly Lazy<InputReaderScript> lazy =
-       new Lazy<InputReaderScript>(() => new InputReaderScript());
-
-    public static InputReaderScript s_instance
-    {
-        get
-        {
-            return lazy.Value;
-        }
-    }
+    public static InputReaderScript s_instance;
 
     [SerializeField]
     public KeyCode m_keyUp;
     [SerializeField]
     public KeyCode m_keyDown;
+    [SerializeField]
+    public KeyCode m_keyReset;
 
     public delegate void OnDownMovementKeyStatusChangeEvent(bool keyStatus);
-    public OnDownMovementKeyStatusChangeEvent m_downMovementKeyStatusChange;
+    public OnDownMovementKeyStatusChangeEvent m_onDownMovementKeyStatusChange;
+
+    public delegate void OnUpMovementKeySPressEvent();
+    public OnUpMovementKeySPressEvent m_onUpMovementKeyPress;
+
+    public delegate void OnResetKeyPressEvent();
+    public OnResetKeyPressEvent m_onResetKeyPress;
 
     void Start()
     {
@@ -32,23 +30,43 @@ public class InputReaderScript : MonoBehaviour
 
     private void Awake()
     {
-        m_keyUp = KeyCode.A;
-        m_keyDown = KeyCode.D;
+        if (s_instance != null && s_instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            s_instance = this;
+        }
 
-        m_downMovementKeyStatusChange += PlayerScript.s_instance.OnDownMovementKeyStatusChange;
+        m_keyUp = KeyCode.W;
+        m_keyDown = KeyCode.S;
+
+        m_onDownMovementKeyStatusChange += PlayerScript.s_instance.OnDownMovementKeyStatusChange;
+        m_onUpMovementKeyPress += PlayerScript.s_instance.OnUpMovementKeyPress;
+
+        m_keyReset = KeyCode.Space;
+
+        m_onResetKeyPress += PlayerScript.s_instance.ResetPlayer;
 
         Debug.Log(this.GetType().ToString() + " Initialized!");
     }
 
     void Update()
     {
-        if(m_downMovementKeyStatusChange == null)
+        if ((Input.GetKeyDown(m_keyDown) || Input.GetKeyUp(m_keyDown)) && m_onDownMovementKeyStatusChange != null)
         {
-            Debug.Log("Event is null");
+            m_onDownMovementKeyStatusChange(Input.GetKeyDown(m_keyDown));
         }
-        if ((Input.GetKeyDown(m_keyDown) || Input.GetKeyUp(m_keyDown)) && m_downMovementKeyStatusChange != null)
+
+        if (Input.GetKeyDown(m_keyReset))
         {
-            m_downMovementKeyStatusChange(Input.GetKeyDown(m_keyDown));
+            m_onResetKeyPress();
+        }
+
+        if (Input.GetKeyDown(m_keyUp))
+        {
+            m_onUpMovementKeyPress();
         }
     }
 }
