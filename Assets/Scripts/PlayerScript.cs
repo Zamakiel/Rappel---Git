@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-    enum PlayerJumpingStates
+    public enum PlayerJumpingStates
     {
         error = -1,
         idle,
@@ -15,8 +15,9 @@ public class PlayerScript : MonoBehaviour
         walking,
         count
     }
-    [SerializeField]
-    PlayerJumpingStates m_jumpingState;
+
+    
+    public PlayerJumpingStates m_jumpingState;
 
     //Lazy singleton
     public static PlayerScript s_instance;
@@ -33,6 +34,15 @@ public class PlayerScript : MonoBehaviour
 
     [SerializeField]
     float m_maxYPosition;
+
+    [SerializeField]
+    GameEvent m_playerJumpingEvent;
+
+    [SerializeField]
+    GameEvent m_playerIdleEvent;
+
+    [SerializeField]
+    GameEvent m_playerWalkingEvent;
 
     Vector2 m_speed
     {
@@ -114,6 +124,7 @@ public class PlayerScript : MonoBehaviour
         m_speed = Vector2.zero;
 
         m_jumpingState = PlayerJumpingStates.idle;
+        m_playerIdleEvent.Raise();
         m_keyDownTime = 0;
         m_isDownMovementKeyPressed = false;
     }
@@ -121,6 +132,7 @@ public class PlayerScript : MonoBehaviour
     IEnumerator PlayerMoveUpCorutine()
     {
         m_jumpingState = PlayerJumpingStates.walking;
+        m_playerWalkingEvent.Raise();
         InputReaderScript.s_instance.m_onUpMovementKeyPress -= OnUpMovementKeyPress;
         const float kVerticalTravelTimeSeconds = 1;
         Vector3 direction = new Vector3(-1, -1, 0);
@@ -153,11 +165,14 @@ public class PlayerScript : MonoBehaviour
 
         InputReaderScript.s_instance.m_onUpMovementKeyPress += OnUpMovementKeyPress;
         m_jumpingState = PlayerJumpingStates.idle;
+        //Since there is no climbing animation this is unnecessary and causes unwanted behaviour on the animations
+        //m_playerIdleEvent.Raise();
     }
 
     IEnumerator PlayerArchingMoveDownCorutine(float keyPressTime)
     {
         m_jumpingState = PlayerJumpingStates.jumping;
+        m_playerJumpingEvent.Raise();
         InputReaderScript.s_instance.m_onDownMovementKeyStatusChange -= OnDownMovementKeyStatusChange;
         const float kHorizontalJumpDistance = 1;
         m_speed = new Vector2(kHorizontalJumpDistance, -keyPressTime * keyPressTime);
@@ -186,5 +201,6 @@ public class PlayerScript : MonoBehaviour
         m_keyDownTime = 0;
 
         m_jumpingState = PlayerJumpingStates.idle;
+        m_playerIdleEvent.Raise();
     }
 }
