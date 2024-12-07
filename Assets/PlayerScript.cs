@@ -122,7 +122,7 @@ public class PlayerScript : MonoBehaviour
     {
         m_jumpingState = PlayerJumpingStates.walking;
         InputReaderScript.s_instance.m_onUpMovementKeyPress -= OnUpMovementKeyPress;
-        const float kVerticalTravelTimeSeconds = 3;
+        const float kVerticalTravelTimeSeconds = 1;
         Vector3 direction = new Vector3(-1, -1, 0);
         Vector3 speed = new Vector3(0.25f, transform.localPosition.y / kVerticalTravelTimeSeconds, 0);
 
@@ -159,8 +159,8 @@ public class PlayerScript : MonoBehaviour
     {
         m_jumpingState = PlayerJumpingStates.jumping;
         InputReaderScript.s_instance.m_onDownMovementKeyStatusChange -= OnDownMovementKeyStatusChange;
-        const float kSqrtRootOfTwo = 1;
-        m_speed = new Vector2(kSqrtRootOfTwo, -keyPressTime * keyPressTime);
+        const float kHorizontalJumpDistance = 1;
+        m_speed = new Vector2(kHorizontalJumpDistance, -keyPressTime * keyPressTime);
 
         do
         {
