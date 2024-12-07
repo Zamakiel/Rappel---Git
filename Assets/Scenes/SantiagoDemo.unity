@@ -710,9 +710,9 @@ MonoBehaviour:
   m_acceleration: {x: 0, y: 0}
   m_speedPrivate: {x: 0, y: 0}
   m_maxYPosition: 0
-  m_playerJumpingEvent: {fileID: 0}
-  m_playerIdleEvent: {fileID: 0}
-  m_playerWalkingEvent: {fileID: 0}
+  m_playerJumpingEvent: {fileID: 11400000, guid: 18ef70437a6f5b54398814acd9a56ce7, type: 2}
+  m_playerIdleEvent: {fileID: 11400000, guid: 57ee7cc709a045440a78b711ab3e0dc0, type: 2}
+  m_playerWalkingEvent: {fileID: 11400000, guid: 9cad3a4610a882846a71b81c4376333a, type: 2}
 --- !u!1 &1604999980
 GameObject:
   m_ObjectHideFlags: 0

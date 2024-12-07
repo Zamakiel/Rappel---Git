@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 3659535551127022990}
   - component: {fileID: 7370276455377194591}
   - component: {fileID: 8925719718384676515}
-  - component: {fileID: 8964217435906081800}
-  - component: {fileID: 4938851975213920053}
+  - component: {fileID: 1518871052231022824}
+  - component: {fileID: 9095853117769027358}
   m_Layer: 0
   m_Name: Player Graphics
   m_TagString: Untagged
@@ -4914,7 +4914,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &8964217435906081800
+--- !u!114 &1518871052231022824
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4926,11 +4926,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e91b2b547f2c35c49827777345b408a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 0}
+  Event: {fileID: 11400000, guid: a22cda5da99c7ea4bbde0459518a9109, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4938851975213920053
+--- !u!114 &9095853117769027358
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4942,7 +4942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e91b2b547f2c35c49827777345b408a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 0}
+  Event: {fileID: 11400000, guid: 18ef70437a6f5b54398814acd9a56ce7, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls: []
