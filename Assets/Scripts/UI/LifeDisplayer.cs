@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class LifeDisplayer : MonoBehaviour
@@ -14,6 +15,10 @@ public class LifeDisplayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        GetComponent<TextMeshProUGUI>().text = 
+            "Lives: " +
+            currentHealth.Value.ToString() + 
+            "/" + 
+            totalHealth.Value.ToString();
     }
 }

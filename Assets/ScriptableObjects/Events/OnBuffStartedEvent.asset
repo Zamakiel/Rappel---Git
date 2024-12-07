@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 430ace7bccf0ce4489a3c2d4b2806986, type: 3}
-  m_Name: OnSpreadShotObtained
+  m_Name: OnBuffStartedEvent
   m_EditorClassIdentifier: 
