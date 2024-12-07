@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 03f880140e3851a418b97a12125feb4a
+guid: 27e0177bf4256c14bb6cb74f4c78636f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6085846537427352159
-    second: Player-Hanging Darker_0
+      213: 3644134122675786031
+    second: Player - Falling Darker_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player-Hanging Darker_0
+      name: Player - Falling Darker_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 15
-        width: 1106
-        height: 1056
+        x: 71
+        y: 149
+        width: 973
+        height: 919
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1a50a1381daba8ba0800000000000000
-      internalID: -6085846537427352159
+      spriteID: f2158f75da0929230800000000000000
+      internalID: 3644134122675786031
       vertices: []
       indices: 
       edges: []
