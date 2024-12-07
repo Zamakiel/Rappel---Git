@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Player-Hanging Darker_0: -6085846537427352159
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
