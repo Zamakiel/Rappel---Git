@@ -111,7 +111,7 @@ SpriteRenderer:
   m_Size: {x: 10.98, y: 10.26}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!198 &7370276455377194591
@@ -4923,37 +4923,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8085567858199667825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41de05f995388a1409b81e882d29ab02, type: 3}
+  m_Script: {fileID: 11500000, guid: e91b2b547f2c35c49827777345b408a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 80c8d9c7af81b674a95a78489f5c3a63, type: 2}
+  Event: {fileID: 0}
   Response:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 411660676572238559}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Jumping Trigger
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7370276455377194591}
-        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Jumping Trigger
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &4938851975213920053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4963,46 +4939,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8085567858199667825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41de05f995388a1409b81e882d29ab02, type: 3}
+  m_Script: {fileID: 11500000, guid: e91b2b547f2c35c49827777345b408a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 69ee6589488ba8941ade2c744b2d7a84, type: 2}
+  Event: {fileID: 0}
   Response:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 411660676572238559}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Hanging Trigger
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7370276455377194591}
-        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
-        m_MethodName: Stop
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Hanging Trigger
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7370276455377194591}
-        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
-        m_MethodName: Clear
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Hanging Trigger
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
