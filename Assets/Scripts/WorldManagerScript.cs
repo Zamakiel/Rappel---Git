@@ -8,28 +8,13 @@ public class WorldManagerScript : MonoBehaviour
 {
     public static WorldManagerScript s_instance;
 
-    float m_referenceBuildingFloorHeight = 5;
+    List<Sprite> m_entireBuildingOrderedSprites;
+    public List<GameObject> m_entireBuildingOrderedGameObjects;
 
-    [SerializeField]
-    Sprite m_buildingRoofSprite;
-    [SerializeField]
-    public List<Sprite> m_buildingFloorSprites;
-    [SerializeField]
-    Sprite m_buildingBaseSprite;
-    [SerializeField]
-    Sprite m_worldFloorSprite;
-
-    [SerializeField]
-    GameObject m_buildingRoofGameObject;
-    [SerializeField]
-    GameObject m_buildingFloorsContainerGameObject;
-    [SerializeField]
+    public GameObject m_buildingRoofGameObject;
     public List<GameObject> m_buildingFloorGameObjects;
-    [SerializeField]
     public GameObject m_buildingBaseGameObject;
-    [SerializeField]
     public GameObject m_worldFloorGameObject;
-    [SerializeField]
     public GameObject m_craneAnchorPoint;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -47,8 +32,21 @@ public class WorldManagerScript : MonoBehaviour
         {
             s_instance = this;
         }
+        DontDestroyOnLoad(this);
 
+        if (!m_initialized)
+        {
+            Initialize();
+        }
+    }
+
+    public bool m_initialized = false;
+    public void Initialize()
+    {
         CreateBuilding();
+
+        m_initialized = true;
+        Debug.Log(this.GetType().ToString() + " Initialized!");
     }
 
     public enum WindowTypes
@@ -61,15 +59,21 @@ public class WorldManagerScript : MonoBehaviour
 
     }
 
-    Transform GetWindowPosition(int floor, WindowTypes windowType)
+    public Transform GetWindowPosition(int floor, WindowTypes windowType)
     {
-        if (floor > m_buildingFloorGameObjects.Count)
+        if (floor > m_entireBuildingOrderedGameObjects.Count)
         {
             Debug.LogWarning("Tried to get window of non existing floor");
-            return null;
+            return transform;
         }
 
-        GameObject currentFloor = m_buildingFloorGameObjects[floor];
+        GameObject currentFloor = m_entireBuildingOrderedGameObjects[floor];
+        if (currentFloor.transform.childCount <= (int)windowType)
+        {
+            Debug.LogWarning("Tried to get non existing window of " + currentFloor.name);
+            return transform;
+        }
+
         return currentFloor.transform.GetChild((int)windowType);
     }
 
@@ -83,32 +87,47 @@ public class WorldManagerScript : MonoBehaviour
     int m_floors = 2;
     public void CreateBuilding()
     {
-        Vector2 floorSize = m_buildingBaseSprite.rect.size;
-        floorSize = floorSize / m_buildingBaseSprite.pixelsPerUnit;
-        m_buildingBaseGameObject.transform.position = m_worldFloorGameObject.transform.position + new Vector3(0, 0.5f * floorSize.y, 0);
-
-        float previousFloorSize = floorSize.y;
-        GameObject previousFloor = m_buildingBaseGameObject;
-        for (int floorCounter = 0; floorCounter < m_floors; floorCounter++)
+        float previousFloorSize = 0;
+        GameObject previousFloor = null;
+        int m_totalFloors = m_floors + 2;
+        m_entireBuildingOrderedSprites = new List<Sprite>();
+        for (int floorCounter = 0; floorCounter < m_totalFloors; floorCounter++)
         {
-            GameObject floor = Instantiate(Resources.Load("Prefabs/BuildingFloorPrefab")) as GameObject;
-            floor.name = "Floor " + floorCounter;
+            GameObject floor;
+            if (floorCounter == 0)
+            {
+                floor = Instantiate(Resources.Load("Prefabs/BuildingBasePrefab")) as GameObject;
+                floor.name = "Building Base";
+                m_buildingBaseGameObject = floor;
+            }
+            else if (floorCounter == m_totalFloors - 1)
+            {
+                floor = Instantiate(Resources.Load("Prefabs/BuildingRoofPrefab")) as GameObject;
+                floor.name = "Building Floor " + floorCounter;
+                m_buildingRoofGameObject = floor;
+                m_craneAnchorPoint = m_buildingRoofGameObject.transform.GetChild(0).GetChild(0).gameObject;
+            }
+            else
+            {
+                floor = Instantiate(Resources.Load("Prefabs/BuildingFloorPrefab")) as GameObject;
+                floor.name = "Building Roof";
+                m_buildingFloorGameObjects.Add(floor);
+            }
 
-            floorSize = floor.GetComponent<SpriteRenderer>().sprite.rect.size;
+            var floorSize = floor.GetComponent<SpriteRenderer>().sprite.rect.size;
             floorSize = floorSize / floor.GetComponent<SpriteRenderer>().sprite.pixelsPerUnit;
-            floor.transform.SetParent(m_buildingFloorsContainerGameObject.transform, false);
-            floor.transform.position = previousFloor.transform.position + new Vector3(0, 0.5f * (floorSize.y + previousFloorSize), 0);
+            floor.transform.SetParent(transform, false);
+            floor.transform.position = new Vector3(0, 0.5f * (floorSize.y + previousFloorSize), 0);
+            if (previousFloor != null)
+            {
+                floor.transform.position += previousFloor.transform.position;
+            }
 
-            m_buildingFloorGameObjects.Add(floor);
-            m_buildingFloorSprites.Add(floor.GetComponent<SpriteRenderer>().sprite);
+            m_entireBuildingOrderedGameObjects.Add(floor);
+            m_entireBuildingOrderedSprites.Add(floor.GetComponent<SpriteRenderer>().sprite);
 
             previousFloorSize = floorSize.y;
             previousFloor = floor;
         }
-
-        floorSize = m_buildingRoofSprite.rect.size;
-        floorSize = floorSize / m_buildingRoofSprite.pixelsPerUnit;
-        m_buildingRoofGameObject.transform.position = previousFloor.transform.position + new Vector3(0, 0.5f * (floorSize.y + previousFloorSize), 0);
-
     }
 }

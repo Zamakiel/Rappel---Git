@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac166e81844b69439189d8ea840b7ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_bulletLifeTime: 1
-  m_bulletSpeed: 6
+  m_bulletLifeTime: 5
+  m_bulletSpeed: 15
 --- !u!212 &6428396675903442340
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -133,7 +133,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
