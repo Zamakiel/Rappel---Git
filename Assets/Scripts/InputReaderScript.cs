@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class InputReaderScript : MonoBehaviour
 {
-    public static InputReaderScript s_instance;
+    private static InputReaderScript s_instancePrivate;
+    public static InputReaderScript s_instance { get { return s_instancePrivate; } }    
 
     [SerializeField]
     public KeyCode m_keyUp;
@@ -38,8 +39,9 @@ public class InputReaderScript : MonoBehaviour
         }
         else
         {
-            s_instance = this;
+            s_instancePrivate = this;
         }
+        DontDestroyOnLoad(this);
 
         m_keyUp = KeyCode.W;
         m_keyDown = KeyCode.S;

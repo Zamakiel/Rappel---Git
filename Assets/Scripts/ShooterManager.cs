@@ -23,7 +23,7 @@ public class ShooterManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -31,7 +31,7 @@ public class ShooterManager : MonoBehaviour
     {
     }
 
-    private void Awake()
+    void Awake()
     {
         if (s_instance != null && s_instance != this)
         {
@@ -41,8 +41,11 @@ public class ShooterManager : MonoBehaviour
         {
             s_instance = this;
         }
+        DontDestroyOnLoad(this);
 
         m_canShoot = true;
+
+        Debug.Log(this.GetType().ToString() + " Initialized!");
     }
 
     public void Shoot()

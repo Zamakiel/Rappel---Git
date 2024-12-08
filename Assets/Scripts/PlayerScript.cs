@@ -60,6 +60,7 @@ public class PlayerScript : MonoBehaviour
         {
             s_instance = this;
         }
+        DontDestroyOnLoad(this);
 
         m_isDownMovementKeyPressed = false;
         m_jumpingState = PlayerJumpingStates.idle;
