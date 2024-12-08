@@ -71,7 +71,7 @@ public class InputReaderScript : MonoBehaviour
             m_onResetKeyPress();
         }
 
-        if (Input.GetKeyDown(m_keyUp))
+        if (Input.GetKeyDown(m_keyUp) && m_onResetKeyPress != null)
         {
             m_onUpMovementKeyPress();
         }

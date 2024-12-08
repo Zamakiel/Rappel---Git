@@ -26,7 +26,7 @@ public class WorldManagerScript : MonoBehaviour
     [SerializeField]
     public List<GameObject> m_buildingFloorGameObjects;
     [SerializeField]
-    GameObject m_buildingBaseGameObject;
+    public GameObject m_buildingBaseGameObject;
     [SerializeField]
     public GameObject m_worldFloorGameObject;
     [SerializeField]
@@ -49,6 +49,28 @@ public class WorldManagerScript : MonoBehaviour
         }
 
         CreateBuilding();
+    }
+
+    public enum WindowTypes
+    {
+        error = -1,
+        left,
+        center,
+        right,
+        count
+
+    }
+
+    Transform GetWindowPosition(int floor, WindowTypes windowType)
+    {
+        if (floor > m_buildingFloorGameObjects.Count)
+        {
+            Debug.LogWarning("Tried to get window of non existing floor");
+            return null;
+        }
+
+        GameObject currentFloor = m_buildingFloorGameObjects[floor];
+        return currentFloor.transform.GetChild((int)windowType);
     }
 
     // Update is called once per frame
