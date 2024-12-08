@@ -23,7 +23,7 @@ public class ShooterManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        m_canShoot = true;
+        
     }
 
     // Update is called once per frame
@@ -41,6 +41,8 @@ public class ShooterManager : MonoBehaviour
         {
             s_instance = this;
         }
+
+        m_canShoot = true;
     }
 
     public void Shoot()

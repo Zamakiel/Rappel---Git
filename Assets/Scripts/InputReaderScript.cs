@@ -47,17 +47,16 @@ public class InputReaderScript : MonoBehaviour
 
         m_keyUp = KeyCode.W;
         m_keyDown = KeyCode.S;
-
         m_onDownMovementKeyStatusChange += PlayerScript.s_instance.OnDownMovementKeyStatusChange;
         m_onUpMovementKeyPress += PlayerScript.s_instance.OnUpMovementKeyPress;
 
         m_keyReset = KeyCode.Space;
-
         m_onResetKeyPress += PlayerScript.s_instance.ResetPlayer;
 
-        Debug.Log(this.GetType().ToString() + " Initialized!");
-
+        m_fireKey = KeyCode.Q;
         m_onFireKeyDown += ShooterManager.s_instance.Shoot;
+
+        Debug.Log(this.GetType().ToString() + " Initialized!");
     }
 
     void Update()
