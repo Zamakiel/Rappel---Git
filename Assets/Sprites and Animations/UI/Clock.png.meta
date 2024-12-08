@@ -1,25 +1,16 @@
 fileFormatVersion: 2
-guid: 3f9b9b49e09bdea4fb8c10710aaf9ade
+guid: d75c5f66e5babbc4fb0163f0426b89d8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3427191339372127907
-    second: Props 1_0
+      213: 4214149858688995037
+    second: Clock_0
   - first:
-      213: 4151684406322605577
-    second: Props 1_1
+      213: 7792039334551005206
+    second: Clock_1
   - first:
-      213: -2143930051533120747
-    second: Props 1_2
-  - first:
-      213: 6661983891523347284
-    second: Props 1_3
-  - first:
-      213: 808017669337345824
-    second: Props 1_4
-  - first:
-      213: -1260562738333385475
-    second: Props 1_5
+      213: 8606200704858056018
+    second: Clock_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -61,7 +52,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -111,43 +102,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WindowsStoreApps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Props 1_0
+      name: Clock_0
       rect:
         serializedVersion: 2
-        x: 143
-        y: 68
-        width: 180
-        height: 130
+        x: 228
+        y: 731
+        width: 205
+        height: 234
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,20 +121,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3a622987d54df8f20800000000000000
-      internalID: 3427191339372127907
+      spriteID: dde8b6d08faab7a30800000000000000
+      internalID: 4214149858688995037
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Props 1_1
+      name: Clock_1
       rect:
         serializedVersion: 2
-        x: 391
-        y: 70
-        width: 184
-        height: 116
+        x: 282
+        y: 291
+        width: 603
+        height: 587
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,20 +143,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 90e236298febd9930800000000000000
-      internalID: 4151684406322605577
+      spriteID: 618a8c3ad72e22c60800000000000000
+      internalID: 7792039334551005206
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Props 1_2
+      name: Clock_2
       rect:
         serializedVersion: 2
-        x: 944
-        y: 109
-        width: 379
-        height: 191
+        x: 730
+        y: 745
+        width: 202
+        height: 211
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,74 +165,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 51b55172afa3f32e0800000000000000
-      internalID: -2143930051533120747
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Props 1_3
-      rect:
-        serializedVersion: 2
-        x: 1424
-        y: 118
-        width: 257
-        height: 810
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 453af997d0f147c50800000000000000
-      internalID: 6661983891523347284
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Props 1_4
-      rect:
-        serializedVersion: 2
-        x: 1730
-        y: 110
-        width: 101
-        height: 136
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 02f67190ac7a63b00800000000000000
-      internalID: 808017669337345824
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Props 1_5
-      rect:
-        serializedVersion: 2
-        x: 1029
-        y: 55
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: dfc7b844ed4918ee0800000000000000
-      internalID: -1260562738333385475
+      spriteID: 255e7c681fd5f6770800000000000000
+      internalID: 8606200704858056018
       vertices: []
       indices: 
       edges: []
@@ -276,7 +175,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -286,12 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Props 1_0: 3427191339372127907
-      Props 1_1: 4151684406322605577
-      Props 1_2: -2143930051533120747
-      Props 1_3: 6661983891523347284
-      Props 1_4: 808017669337345824
-      Props 1_5: -1260562738333385475
+      Clock_0: 4214149858688995037
+      Clock_1: 7792039334551005206
+      Clock_2: 8606200704858056018
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

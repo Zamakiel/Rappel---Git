@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Distressed NPC_0: 1282502428294210629
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
