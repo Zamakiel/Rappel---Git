@@ -62,6 +62,15 @@ public class PlayerScript : MonoBehaviour
         }
         DontDestroyOnLoad(this);
 
+        if (!m_initialized)
+        {
+            Initialize();
+        }
+    }
+
+    public bool m_initialized = false;
+    public void Initialize()
+    {
         m_isDownMovementKeyPressed = false;
         m_jumpingState = PlayerJumpingStates.idle;
         m_keyDownTime = 0;
@@ -78,6 +87,7 @@ public class PlayerScript : MonoBehaviour
 
         ResetPlayer();
 
+        m_initialized = true;
         Debug.Log(this.GetType().ToString() + " Initialized!");
     }
 
@@ -139,11 +149,10 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-
     public void ResetPlayer()
     {
-        GameObject lastFloorGameObject = WorldManagerScript.s_instance.m_buildingFloorGameObjects[WorldManagerScript.s_instance.m_buildingFloorGameObjects.Count - 1];
-        SpriteRenderer lastFloorSprite = lastFloorGameObject.GetComponent<SpriteRenderer>();
+        GameObject lastFloorGameObject = WorldManagerScript.s_instance.m_entireBuildingOrderedGameObjects[WorldManagerScript.s_instance.m_entireBuildingOrderedGameObjects.Count - 2];
+        SpriteRenderer lastFloorSprite = WorldManagerScript.s_instance.m_buildingRoofGameObject.GetComponent<SpriteRenderer>();
 
         m_startPosition = lastFloorGameObject.transform.position;
         m_startPosition.x += 0.5f * lastFloorGameObject.transform.localScale.x * lastFloorSprite.sprite.rect.size.x / lastFloorSprite.sprite.pixelsPerUnit;
@@ -156,7 +165,7 @@ public class PlayerScript : MonoBehaviour
         m_keyDownTime = 0;
         m_isDownMovementKeyPressed = false;
         m_currentRappelTime = 0;
-        m_maxRappelTimeSeconds = 5;
+        m_maxRappelTimeSeconds = 50;
     }
 
     IEnumerator PlayerMoveUpCorutine()
@@ -166,6 +175,15 @@ public class PlayerScript : MonoBehaviour
         const float kVerticalTravelTimeSeconds = 1;
         const float kHorizontalTravelTimeSeconds = 1;
         m_anchorPosition = m_startPosition;
+
+        if (m_isDownMovementKeyPressed)
+        {
+            m_isDownMovementKeyPressed = false;
+        }
+        if (m_keyDownTime != 0)
+        {
+            m_keyDownTime = 0;
+        }
 
         m_jumpingState = PlayerJumpingStates.walking;
         var travelDistance = m_anchorPosition.x - transform.localPosition.x;
@@ -216,6 +234,7 @@ public class PlayerScript : MonoBehaviour
     IEnumerator PlayerArchingMoveDownCorutine(float keyPressTime)
     {
         m_jumpingState = PlayerJumpingStates.jumping;
+        m_currentRappelTime = 0;
         m_playerJumpingEvent.Raise();
         InputReaderScript.s_instance.m_onDownMovementKeyStatusChange -= OnDownMovementKeyStatusChange;
 

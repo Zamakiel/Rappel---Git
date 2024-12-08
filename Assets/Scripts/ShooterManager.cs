@@ -43,8 +43,16 @@ public class ShooterManager : MonoBehaviour
         }
         DontDestroyOnLoad(this);
 
+        if (!m_initialized) { Initialize(); }
+    }
+
+    public bool m_initialized = false;
+    public void Initialize()
+    {
         m_canShoot = true;
 
+        m_initialized = true;
+        m_gunPoint = PlayerScript.s_instance.transform.Find("Gunpoint").transform;
         Debug.Log(this.GetType().ToString() + " Initialized!");
     }
 
