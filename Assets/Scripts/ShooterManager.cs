@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Pool;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class ShooterManager : MonoBehaviour
 {
+    public static ShooterManager s_instance;
+
     public Transform m_gunPoint;
     public GameObject m_bulletPrefab;
     public GameObject m_bulletPrefab2;
@@ -26,7 +29,18 @@ public class ShooterManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    }
 
+    private void Awake()
+    {
+        if (s_instance != null && s_instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            s_instance = this;
+        }
     }
 
     public void Shoot()

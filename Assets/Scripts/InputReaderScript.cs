@@ -7,7 +7,6 @@ using UnityEngine;
 public class InputReaderScript : MonoBehaviour
 {
     public static InputReaderScript s_instance;
-    public ShooterManager m_shooterManager;
 
     [SerializeField]
     public KeyCode m_keyUp;
@@ -58,7 +57,7 @@ public class InputReaderScript : MonoBehaviour
 
         Debug.Log(this.GetType().ToString() + " Initialized!");
 
-        m_onFireKeyDown += m_shooterManager.Shoot;
+        m_onFireKeyDown += ShooterManager.s_instance.Shoot;
     }
 
     void Update()

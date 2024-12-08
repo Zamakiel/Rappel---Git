@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    public static PlayerScript s_instance;
+
     public enum PlayerJumpingStates
     {
         error = -1,
@@ -18,9 +20,6 @@ public class PlayerScript : MonoBehaviour
 
 
     public PlayerJumpingStates m_jumpingState;
-
-    //Lazy singleton
-    public static PlayerScript s_instance;
 
     [SerializeField]
     bool m_isDownMovementKeyPressed;
@@ -38,6 +37,10 @@ public class PlayerScript : MonoBehaviour
 
     [SerializeField]
     GameEvent m_playerWalkingEvent;
+
+    [SerializeField]
+    GameObject m_playeerGraphics;
+    SpriteRenderer m_spriteRenderer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -65,7 +68,12 @@ public class PlayerScript : MonoBehaviour
         m_maxVerticalJumpDistance = 10;
         m_maxJumpHoldChargeTime = 10;
         m_jumpFlyTime = 1;
+        m_startPosition = Vector3.zero;
         m_anchorPosition = Vector3.zero;
+
+        m_spriteRenderer = m_playeerGraphics.GetComponent<SpriteRenderer>();
+
+        ResetPlayer();
 
         Debug.Log(this.GetType().ToString() + " Initialized!");
     }
@@ -107,8 +115,14 @@ public class PlayerScript : MonoBehaviour
 
     public void ResetPlayer()
     {
-        m_anchorPosition = Vector3.zero;
-        transform.localPosition = m_anchorPosition;
+        GameObject lastFloorGameObject = WorldManagerScript.s_instance.m_buildingFloorGameObjects[WorldManagerScript.s_instance.m_buildingFloorGameObjects.Count - 1];
+        SpriteRenderer lastFloorSprite = lastFloorGameObject.GetComponent<SpriteRenderer>();
+
+        m_startPosition = lastFloorGameObject.transform.position;
+        m_startPosition.x += 0.5f * lastFloorGameObject.transform.localScale.x * lastFloorSprite.sprite.rect.size.x / lastFloorSprite.sprite.pixelsPerUnit;
+        m_startPosition.x += 0.5f * m_playeerGraphics.transform.localScale.x * m_spriteRenderer.sprite.rect.size.x / m_spriteRenderer.sprite.pixelsPerUnit;
+        transform.localPosition = m_startPosition;
+        m_anchorPosition = m_startPosition;
 
         m_jumpingState = PlayerJumpingStates.idle;
         m_playerIdleEvent.Raise();
@@ -118,37 +132,38 @@ public class PlayerScript : MonoBehaviour
 
     IEnumerator PlayerMoveUpCorutine()
     {
+        InputReaderScript.s_instance.m_onUpMovementKeyPress -= OnUpMovementKeyPress;
+        //Serialize this?
+        const float kVerticalTravelTimeSeconds = 1;
+        const float kHorizontalTravelTimeSeconds = 1;
+        m_anchorPosition = m_startPosition;
+
         m_jumpingState = PlayerJumpingStates.walking;
         m_playerWalkingEvent.Raise();
-        InputReaderScript.s_instance.m_onUpMovementKeyPress -= OnUpMovementKeyPress;
-        const float kVerticalTravelTimeSeconds = 1;
-        Vector3 direction = new Vector3(-1, -1, 0);
-        Vector3 speed = new Vector3(0.25f, transform.localPosition.y / kVerticalTravelTimeSeconds, 0);
-
-        while (transform.localPosition.x != 0)
+        var travelDistance = m_anchorPosition.x - transform.localPosition.x;
+        while (transform.localPosition.x != m_anchorPosition.x)
         {
-            float deltaMove = direction.x * speed.x * Time.deltaTime;
-            if (math.abs(deltaMove) > math.abs(transform.localPosition.x))
+            var deltaMove = new Vector3(Time.deltaTime * travelDistance / kHorizontalTravelTimeSeconds, 0, 0);
+            if (transform.localPosition.x + deltaMove.x < m_anchorPosition.x)
             {
-                deltaMove = -transform.localPosition.x;
+                deltaMove.x = m_anchorPosition.x - transform.localPosition.x;
             }
-
-            transform.localPosition += new Vector3(deltaMove, 0, 0);
+            transform.localPosition += deltaMove;
             yield return null;
         };
 
         m_jumpingState = PlayerJumpingStates.climbing;
-        while (transform.localPosition.y != 0)
+        travelDistance = m_anchorPosition.y - transform.localPosition.y;
+        while (transform.localPosition.y != m_anchorPosition.y)
         {
-            float deltaMove = direction.y * speed.y * Time.deltaTime;
-            if (math.abs(deltaMove) > math.abs(transform.localPosition.y))
+            var deltaMove = new Vector3(0, Time.deltaTime * travelDistance / kVerticalTravelTimeSeconds, 0);
+            if (transform.localPosition.y + deltaMove.y > m_anchorPosition.y)
             {
-                deltaMove = -transform.localPosition.y;
+                deltaMove.y = m_anchorPosition.y - transform.localPosition.y;
             }
-
-            transform.localPosition += new Vector3(0, deltaMove, 0);
+            transform.localPosition += deltaMove;
             yield return null;
-        }
+        };
 
         InputReaderScript.s_instance.m_onUpMovementKeyPress += OnUpMovementKeyPress;
         m_jumpingState = PlayerJumpingStates.idle;
@@ -166,6 +181,8 @@ public class PlayerScript : MonoBehaviour
     float m_maxJumpHoldChargeTime = 10;
     [SerializeField]
     float m_jumpFlyTime = 1;
+    [SerializeField]
+    Vector3 m_startPosition;
     [SerializeField]
     Vector3 m_anchorPosition;
     IEnumerator PlayerArchingMoveDownCorutine(float keyPressTime)
