@@ -13,7 +13,12 @@ public class LifeManager : MonoBehaviour
         CurrentHealth.Value = MaxHealth.Value;
     }
 
-    void TakeDamage(int damage)
+    public void RecoverDamage(int recover)
+    {
+        CurrentHealth.Value = Mathf.Min(MaxHealth.Value, CurrentHealth.Value + recover);        
+    }
+
+    public void TakeDamage(int damage)
     {
         CurrentHealth.Value = Mathf.Max(0, CurrentHealth.Value-damage);
         if (CurrentHealth.Value == 0)

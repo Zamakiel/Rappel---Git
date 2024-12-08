@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3914907448252708850}
   - component: {fileID: 2620171963691235850}
+  - component: {fileID: 6370066924319162788}
   m_Layer: 0
   m_Name: LifeManager
   m_TagString: Untagged
@@ -47,3 +48,31 @@ MonoBehaviour:
   CurrentHealth: {fileID: 11400000, guid: db6556edc8b82c2408228ebbaa38f066, type: 2}
   MaxHealth: {fileID: 11400000, guid: 2e30919b4b304264c89594b3521fc52f, type: 2}
   OnGameOverEvent: {fileID: 11400000, guid: b50b41b6bda49614ba7a785dfc229260, type: 2}
+--- !u!114 &6370066924319162788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6584051630437772321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e91b2b547f2c35c49827777345b408a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 49b18e45591113d44a6a97129cd47270, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2620171963691235850}
+        m_TargetAssemblyTypeName: LifeManager, Assembly-CSharp
+        m_MethodName: TakeDamage
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
