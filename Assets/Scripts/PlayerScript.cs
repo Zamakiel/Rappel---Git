@@ -36,7 +36,9 @@ public class PlayerScript : MonoBehaviour
     GameEvent m_playerIdleEvent;
 
     [SerializeField]
-    GameEvent m_playerWalkingEvent;
+    GameEvent m_onChargeStart;
+    [SerializeField]
+    GameEvent m_onChargeEnd;
 
     [SerializeField]
     GameObject m_playeerGraphics;
@@ -85,6 +87,7 @@ public class PlayerScript : MonoBehaviour
         if (m_isDownMovementKeyPressed)
         {
             m_keyDownTime += Time.deltaTime;
+
             if (m_keyDownTime > m_maxJumpHoldChargeTime)
             {
                 m_keyDownTime = m_maxJumpHoldChargeTime;
@@ -97,8 +100,15 @@ public class PlayerScript : MonoBehaviour
         if (m_jumpingState == PlayerJumpingStates.idle && m_isDownMovementKeyPressed != keyStatus)
         {
             m_isDownMovementKeyPressed = keyStatus;
+
+            if (keyStatus)
+            {
+                m_onChargeStart.Raise();
+            }
+
             if (!m_isDownMovementKeyPressed && m_jumpingState == PlayerJumpingStates.idle)
             {
+                m_onChargeEnd.Raise();
                 StartCoroutine(PlayerArchingMoveDownCorutine(m_keyDownTime));
             }
         }
@@ -139,7 +149,6 @@ public class PlayerScript : MonoBehaviour
         m_anchorPosition = m_startPosition;
 
         m_jumpingState = PlayerJumpingStates.walking;
-        m_playerWalkingEvent.Raise();
         var travelDistance = m_anchorPosition.x - transform.localPosition.x;
         while (transform.localPosition.x != m_anchorPosition.x)
         {

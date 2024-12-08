@@ -1,7 +1,3 @@
-using Mono.Cecil.Cil;
-using System;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class InputReaderScript : MonoBehaviour
