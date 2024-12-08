@@ -57,7 +57,9 @@ public class WorldManagerScript : MonoBehaviour
 
     }
 
-    public void CreateBuilding(int floors = 2)
+    [SerializeField]
+    int m_floors = 2;
+    public void CreateBuilding()
     {
         Vector2 floorSize = m_buildingBaseSprite.rect.size;
         floorSize = floorSize / m_buildingBaseSprite.pixelsPerUnit;
@@ -65,7 +67,7 @@ public class WorldManagerScript : MonoBehaviour
 
         float previousFloorSize = floorSize.y;
         GameObject previousFloor = m_buildingBaseGameObject;
-        for (int floorCounter = 0; floorCounter < floors; floorCounter++)
+        for (int floorCounter = 0; floorCounter < m_floors; floorCounter++)
         {
             GameObject floor = Instantiate(Resources.Load("Prefabs/BuildingFloorPrefab")) as GameObject;
             floor.name = "Floor " + floorCounter;
