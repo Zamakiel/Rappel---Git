@@ -16,7 +16,7 @@ public class PlayerScript : MonoBehaviour
         count
     }
 
-    
+
     public PlayerJumpingStates m_jumpingState;
 
     //Lazy singleton
@@ -26,11 +26,6 @@ public class PlayerScript : MonoBehaviour
     bool m_isDownMovementKeyPressed;
     [SerializeField]
     float m_keyDownTime;
-
-    [SerializeField]
-    Vector2 m_acceleration;
-    [SerializeField]
-    Vector2 m_speedPrivate;
 
     [SerializeField]
     float m_maxYPosition;
@@ -43,16 +38,6 @@ public class PlayerScript : MonoBehaviour
 
     [SerializeField]
     GameEvent m_playerWalkingEvent;
-
-    Vector2 m_speed
-    {
-
-        get { return m_speedPrivate; }
-        set
-        {
-            m_speedPrivate = value;
-        }
-    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -74,10 +59,14 @@ public class PlayerScript : MonoBehaviour
         m_isDownMovementKeyPressed = false;
         m_jumpingState = PlayerJumpingStates.idle;
         m_keyDownTime = 0;
-        m_acceleration = new Vector2(1.25f, 0);
         m_maxYPosition = 2.5f;
 
-        //InputReaderScript.s_instance.m_downMovementKeyStatusChange += OnDownMovementKeyStatusChange;
+        m_maxHorizontalJumpDistance = 10;
+        m_maxVerticalJumpDistance = 10;
+        m_maxJumpHoldChargeTime = 10;
+        m_jumpFlyTime = 1;
+        m_anchorPosition = Vector3.zero;
+
         Debug.Log(this.GetType().ToString() + " Initialized!");
     }
 
@@ -88,11 +77,10 @@ public class PlayerScript : MonoBehaviour
         if (m_isDownMovementKeyPressed)
         {
             m_keyDownTime += Time.deltaTime;
-            Debug.Log("Charging jump, current charge: " + (m_keyDownTime * m_keyDownTime));
-        }
-        else
-        {
-            //Debug.Log("Not charging jump");
+            if (m_keyDownTime > m_maxJumpHoldChargeTime)
+            {
+                m_keyDownTime = m_maxJumpHoldChargeTime;
+            }
         }
     }
 
@@ -101,7 +89,6 @@ public class PlayerScript : MonoBehaviour
         if (m_jumpingState == PlayerJumpingStates.idle && m_isDownMovementKeyPressed != keyStatus)
         {
             m_isDownMovementKeyPressed = keyStatus;
-            Debug.Log("Key state changed to: " + m_isDownMovementKeyPressed);
             if (!m_isDownMovementKeyPressed && m_jumpingState == PlayerJumpingStates.idle)
             {
                 StartCoroutine(PlayerArchingMoveDownCorutine(m_keyDownTime));
@@ -120,8 +107,8 @@ public class PlayerScript : MonoBehaviour
 
     public void ResetPlayer()
     {
-        transform.localPosition = Vector3.zero;
-        m_speed = Vector2.zero;
+        m_anchorPosition = Vector3.zero;
+        transform.localPosition = m_anchorPosition;
 
         m_jumpingState = PlayerJumpingStates.idle;
         m_playerIdleEvent.Raise();
@@ -169,35 +156,45 @@ public class PlayerScript : MonoBehaviour
         //m_playerIdleEvent.Raise();
     }
 
+    [SerializeField]
+    public AnimationCurve m_jumpingCurve;
+    [SerializeField]
+    float m_maxHorizontalJumpDistance = 10;
+    [SerializeField]
+    float m_maxVerticalJumpDistance = 10;
+    [SerializeField]
+    float m_maxJumpHoldChargeTime = 10;
+    [SerializeField]
+    float m_jumpFlyTime = 1;
+    [SerializeField]
+    Vector3 m_anchorPosition;
     IEnumerator PlayerArchingMoveDownCorutine(float keyPressTime)
     {
         m_jumpingState = PlayerJumpingStates.jumping;
         m_playerJumpingEvent.Raise();
         InputReaderScript.s_instance.m_onDownMovementKeyStatusChange -= OnDownMovementKeyStatusChange;
-        const float kHorizontalJumpDistance = 1;
-        m_speed = new Vector2(kHorizontalJumpDistance, -keyPressTime * keyPressTime);
 
+        var jumpVerticalDistance = Mathf.Min(keyPressTime * keyPressTime, m_maxVerticalJumpDistance);
+        var jumpHorizontalDistance = Mathf.Min(keyPressTime, m_maxHorizontalJumpDistance);
+        m_anchorPosition = transform.localPosition;
+
+        float accumulatedJumpTime = 0;
         do
         {
-            m_speed = m_speed - new Vector2(m_acceleration.x * Time.deltaTime, 0);
-            var deltaMovement = Time.deltaTime * new Vector3(m_speed.x, m_speed.y, 0);
-            if (transform.localPosition.x + deltaMovement.x < 0)
-            {
-                deltaMovement.x = -transform.localPosition.x;
-            }
-            if (transform.localPosition.y + deltaMovement.y < -m_maxYPosition)
-            {
-                deltaMovement.y = -transform.localPosition.y - m_maxYPosition;
-            }
-            transform.localPosition += deltaMovement;
+            accumulatedJumpTime += (Time.deltaTime);
 
-            Debug.Log("Corutine loop");
+            var normalizedTime = accumulatedJumpTime / keyPressTime;
+            var horizontalPosition = jumpHorizontalDistance * m_jumpingCurve.Evaluate(normalizedTime);
+            var verticalPosition = -jumpVerticalDistance * normalizedTime;
+
+            var deltaPos = new Vector3(horizontalPosition, verticalPosition);
+            transform.localPosition = m_anchorPosition + deltaPos;
+
             yield return null;
-        } while (transform.localPosition.x > 0 && transform.localPosition.y > -m_maxYPosition);
+        } while (accumulatedJumpTime < m_jumpFlyTime);
 
         InputReaderScript.s_instance.m_onDownMovementKeyStatusChange += OnDownMovementKeyStatusChange;
 
-        m_speed = Vector2.zero;
         m_keyDownTime = 0;
 
         m_jumpingState = PlayerJumpingStates.idle;

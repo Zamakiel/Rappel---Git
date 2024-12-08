@@ -713,6 +713,30 @@ MonoBehaviour:
   m_playerJumpingEvent: {fileID: 11400000, guid: 18ef70437a6f5b54398814acd9a56ce7, type: 2}
   m_playerIdleEvent: {fileID: 11400000, guid: 57ee7cc709a045440a78b711ab3e0dc0, type: 2}
   m_playerWalkingEvent: {fileID: 11400000, guid: 9cad3a4610a882846a71b81c4376333a, type: 2}
+  m_jumpingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.9888916
+      value: -0.0031433105
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1604999980
 GameObject:
   m_ObjectHideFlags: 0
