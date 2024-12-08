@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using System;
 using Unity.Mathematics;
 using Unity.VisualScripting;
@@ -6,6 +7,7 @@ using UnityEngine;
 public class InputReaderScript : MonoBehaviour
 {
     public static InputReaderScript s_instance;
+    public ShooterManager m_shooterManager;
 
     [SerializeField]
     public KeyCode m_keyUp;
@@ -13,6 +15,8 @@ public class InputReaderScript : MonoBehaviour
     public KeyCode m_keyDown;
     [SerializeField]
     public KeyCode m_keyReset;
+
+    public KeyCode m_fireKey;
 
     public delegate void OnDownMovementKeyStatusChangeEvent(bool keyStatus);
     public OnDownMovementKeyStatusChangeEvent m_onDownMovementKeyStatusChange;
@@ -22,6 +26,9 @@ public class InputReaderScript : MonoBehaviour
 
     public delegate void OnResetKeyPressEvent();
     public OnResetKeyPressEvent m_onResetKeyPress;
+
+    public delegate void OnFireKeyEvent();
+    public OnFireKeyEvent m_onFireKeyDown;
 
     void Start()
     {
@@ -50,6 +57,8 @@ public class InputReaderScript : MonoBehaviour
         m_onResetKeyPress += PlayerScript.s_instance.ResetPlayer;
 
         Debug.Log(this.GetType().ToString() + " Initialized!");
+
+        m_onFireKeyDown += m_shooterManager.Shoot;
     }
 
     void Update()
@@ -67,6 +76,11 @@ public class InputReaderScript : MonoBehaviour
         if (Input.GetKeyDown(m_keyUp))
         {
             m_onUpMovementKeyPress();
+        }
+
+        if (Input.GetKey(m_fireKey))
+        {
+            m_onFireKeyDown();
         }
     }
 }

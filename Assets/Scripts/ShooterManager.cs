@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -9,43 +11,48 @@ public class ShooterManager : MonoBehaviour
     public GameObject m_bulletPrefab;
     public GameObject m_bulletPrefab2;
 
-    public float m_bulletSpeed;
     public float m_shootingInterval;
 
     public List<GameObject> m_bulletPool;
 
-    float m_shootTimer;
+    bool m_canShoot;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        m_canShoot = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        m_shootTimer += Time.deltaTime;
 
-        if(m_shootTimer > m_shootingInterval)
+    }
+
+    public void Shoot()
+    {
+        if (m_canShoot)
         {
-            m_shootTimer = 0f;
-            Shoot();
+            m_canShoot = false;
+            StartCoroutine(DebounceBullets());
+
+            if (m_bulletPool.Exists(x => !x.activeInHierarchy))
+            {
+                GameObject l_bullet = m_bulletPool.Find(x => !x.gameObject.activeInHierarchy);
+                l_bullet.transform.position = m_gunPoint.position;
+                l_bullet.SetActive(true);
+            }
+            else
+            {
+                GameObject l_bullet = Instantiate(m_bulletPrefab, m_gunPoint.position, Quaternion.identity);
+                m_bulletPool.Add(l_bullet);
+            }
         }
     }
 
-    void Shoot()
+    IEnumerator DebounceBullets()
     {
-        if (m_bulletPool.Exists(x => !x.activeInHierarchy))
-        {
-            GameObject l_bullet = m_bulletPool.Find(x => !x.gameObject.activeInHierarchy);
-            l_bullet.transform.position = m_gunPoint.position;
-            l_bullet.SetActive(true);
-        }
-        else
-        {
-            GameObject l_bullet = Instantiate(m_bulletPrefab, m_gunPoint.position, Quaternion.identity);
-            m_bulletPool.Add(l_bullet);
-        }
+        yield return new WaitForSeconds(m_shootingInterval);
+        m_canShoot = true;
     }
 }
