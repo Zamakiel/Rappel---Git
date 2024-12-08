@@ -80,6 +80,9 @@ public class PlayerScript : MonoBehaviour
         Debug.Log(this.GetType().ToString() + " Initialized!");
     }
 
+    float m_currentRappelTime;
+    float m_maxRappelTimeSeconds;
+
     // Update is called once per frame
     void Update()
     {
@@ -91,6 +94,19 @@ public class PlayerScript : MonoBehaviour
             if (m_keyDownTime > m_maxJumpHoldChargeTime)
             {
                 m_keyDownTime = m_maxJumpHoldChargeTime;
+            }
+        }
+
+        if (m_jumpingState == PlayerJumpingStates.idle)
+        {
+            if (transform.localPosition != m_anchorPosition)
+            {
+                m_currentRappelTime += Time.deltaTime;
+            }
+            if (m_currentRappelTime > m_maxRappelTimeSeconds)
+            {
+                m_currentRappelTime = 0;
+                StartCoroutine(PlayerMoveUpCorutine());
             }
         }
     }
@@ -138,6 +154,8 @@ public class PlayerScript : MonoBehaviour
         m_playerIdleEvent.Raise();
         m_keyDownTime = 0;
         m_isDownMovementKeyPressed = false;
+        m_currentRappelTime = 0;
+        m_maxRappelTimeSeconds = 5;
     }
 
     IEnumerator PlayerMoveUpCorutine()
@@ -216,8 +234,14 @@ public class PlayerScript : MonoBehaviour
             var deltaPos = new Vector3(horizontalPosition, verticalPosition);
             transform.localPosition = m_anchorPosition + deltaPos;
 
+            if (transform.position.y <= WorldManagerScript.s_instance.m_buildingBaseGameObject.transform.position.y)
+            {
+                transform.position = new Vector3(transform.position.x, WorldManagerScript.s_instance.m_buildingBaseGameObject.transform.position.y, transform.position.z);
+                StartCoroutine(PlayerMoveUpCorutine());
+            }
+
             yield return null;
-        } while (accumulatedJumpTime < m_jumpFlyTime);
+        } while (accumulatedJumpTime < m_jumpFlyTime && transform.position.y > WorldManagerScript.s_instance.m_buildingBaseGameObject.transform.position.y);
 
         InputReaderScript.s_instance.m_onDownMovementKeyStatusChange += OnDownMovementKeyStatusChange;
 
