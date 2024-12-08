@@ -512,7 +512,7 @@ Transform:
   m_GameObject: {fileID: 881724713}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0, z: -0.10107347, w: -0.994879}
-  m_LocalPosition: {x: 0.518, y: 0.669, z: 0}
+  m_LocalPosition: {x: 0.94, y: 0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -984,7 +984,7 @@ MonoBehaviour:
   m_buildingBaseGameObject: {fileID: 1001165548}
   m_worldFloorGameObject: {fileID: 1822086478}
   m_craneAnchorPoint: {fileID: 881724713}
-  m_floors: 2
+  m_floors: 4
 --- !u!1 &1336173895
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,7 +1012,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.75, y: 1.75, z: 1.75}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 158044767}
@@ -1039,8 +1039,8 @@ MonoBehaviour:
   m_maxYPosition: 0
   m_playerJumpingEvent: {fileID: 11400000, guid: 18ef70437a6f5b54398814acd9a56ce7, type: 2}
   m_playerIdleEvent: {fileID: 11400000, guid: 57ee7cc709a045440a78b711ab3e0dc0, type: 2}
-  m_onChargeStart: {fileID: 0}
-  m_onChargeEnd: {fileID: 0}
+  m_onChargeStart: {fileID: 11400000, guid: 6af38f49b683cd948b77a27b84d86a55, type: 2}
+  m_onChargeEnd: {fileID: 11400000, guid: b79e2f226737fb44a823ad4675120d8a, type: 2}
   m_playeerGraphics: {fileID: 2098088551}
   m_jumpingCurve:
     serializedVersion: 2
@@ -1700,6 +1700,7 @@ GameObject:
   - component: {fileID: 2081575370}
   - component: {fileID: 2081575369}
   - component: {fileID: 2081575368}
+  - component: {fileID: 2081575371}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1750,7 +1751,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1775,12 +1776,56 @@ Transform:
   m_GameObject: {fileID: 2081575367}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 3.75, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2081575371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081575367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &2098088551 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8085567858199667825, guid: 6bd694fd452fc3b4a98603f299ea33f0, type: 3}
