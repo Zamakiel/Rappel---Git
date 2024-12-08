@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f7eaa41b0fb79424c9efb189b8fb598a
+guid: 255638167af71964ea4be4cca348d923
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4813995228156693089
-    second: Player-Hanging_0
+      213: 6539199691983957940
+    second: Player - Hanging White Background_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,43 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player-Hanging_0
+      name: Player - Hanging White Background_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 22
-        width: 1098
-        height: 1044
+        x: 0
+        y: 15
+        width: 1106
+        height: 1056
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 16a84b4872fbec240800000000000000
-      internalID: 4813995228156693089
+      spriteID: 4bf2c044977efba50800000000000000
+      internalID: 6539199691983957940
       vertices: []
       indices: 
       edges: []
@@ -134,8 +160,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Player-Hanging_0: 4813995228156693089
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

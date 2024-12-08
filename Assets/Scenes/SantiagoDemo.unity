@@ -601,7 +601,11 @@ PrefabInstance:
     - target: {fileID: 3659535551127022990, guid: 6bd694fd452fc3b4a98603f299ea33f0, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -6085846537427352159, guid: 03f880140e3851a418b97a12125feb4a, type: 3}
+      objectReference: {fileID: 6539199691983957940, guid: 255638167af71964ea4be4cca348d923, type: 3}
+    - target: {fileID: 3659535551127022990, guid: 6bd694fd452fc3b4a98603f299ea33f0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3659535551127022990, guid: 6bd694fd452fc3b4a98603f299ea33f0, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -1358,7 +1362,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -3, z: 0}
-  m_LocalScale: {x: 1, y: 0.5, z: 0.2}
+  m_LocalScale: {x: 1.5, y: 1, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1177590105}
