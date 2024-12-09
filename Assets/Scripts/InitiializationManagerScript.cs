@@ -36,7 +36,6 @@ public class InitiializationManagerScript : MonoBehaviour
         {
             s_instance = this;
         }
-        DontDestroyOnLoad(this);
 
         m_worldManagerGameObject = Instantiate(Resources.Load("Prefabs/WorldManagerPrefab")) as GameObject;
         if (!WorldManagerScript.s_instance.m_initialized)

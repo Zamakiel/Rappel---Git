@@ -13,7 +13,7 @@ public class SceneManager : MonoBehaviour
 
     public void LoadScene()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(GlobalSceneToLoad.Value.name);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(GlobalSceneToLoad.Value);
     }
 
 
