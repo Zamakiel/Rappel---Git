@@ -44,6 +44,14 @@ public class PlayerScript : MonoBehaviour
     GameObject m_playeerGraphics;
     SpriteRenderer m_spriteRenderer;
 
+    [SerializeField]
+    int m_playerHealthCurrent;
+    [SerializeField]
+    int m_playerHealthMax;
+
+    public delegate void OnDealDamageToPlayerEvent(int damage);
+    public OnDealDamageToPlayerEvent m_onDealDamageToPlayerEvent;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -82,6 +90,10 @@ public class PlayerScript : MonoBehaviour
         m_jumpFlyTime = 1;
         m_startPosition = Vector3.zero;
         m_anchorPosition = Vector3.zero;
+
+        m_playerHealthMax = 10;
+        m_playerHealthCurrent = m_playerHealthMax;
+        m_onDealDamageToPlayerEvent += ReceiveDamage;
 
         m_spriteRenderer = m_playeerGraphics.GetComponent<SpriteRenderer>();
 
@@ -269,5 +281,10 @@ public class PlayerScript : MonoBehaviour
 
         m_jumpingState = PlayerJumpingStates.idle;
         m_playerIdleEvent.Raise();
+    }
+
+    public void ReceiveDamage(int damageAmount)
+    {
+        m_playerHealthCurrent -= damageAmount;
     }
 }

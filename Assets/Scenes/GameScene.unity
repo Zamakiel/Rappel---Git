@@ -210,6 +210,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TimeManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7183041152658962422, guid: 326f0d95c99ad8c4aa5cf867359fc812, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7813275099518043933, guid: 326f0d95c99ad8c4aa5cf867359fc812, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -270,6 +274,10 @@ PrefabInstance:
     - target: {fileID: 2528901964697492316, guid: 756b81b0289a6d84fa24d5b4adfe0d75, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528901964697492316, guid: 756b81b0289a6d84fa24d5b4adfe0d75, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3091436285942371260, guid: 756b81b0289a6d84fa24d5b4adfe0d75, type: 3}
       propertyPath: m_Pivot.x
@@ -411,6 +419,10 @@ PrefabInstance:
     - target: {fileID: 6584051630437772321, guid: e7fe7f98089b5924fa8a4e2f07db15d0, type: 3}
       propertyPath: m_Name
       value: LifeManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6584051630437772321, guid: e7fe7f98089b5924fa8a4e2f07db15d0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

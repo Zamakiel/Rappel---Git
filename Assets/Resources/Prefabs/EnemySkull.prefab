@@ -14569,7 +14569,7 @@ GameObject:
   - component: {fileID: 2101879181848603524}
   - component: {fileID: 6742731719765925308}
   - component: {fileID: 488244370559213284}
-  - component: {fileID: 4237635259940018263}
+  - component: {fileID: 6659435187232945450}
   m_Layer: 0
   m_Name: EnemySkull
   m_TagString: Untagged
@@ -14714,7 +14714,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 4.661281, y: 4.6612844}
   m_EdgeRadius: 0
---- !u!50 &4237635259940018263
+--- !u!50 &6659435187232945450
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -14726,7 +14726,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
+  m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1

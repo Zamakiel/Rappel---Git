@@ -5,6 +5,9 @@ public class Bullet : MonoBehaviour
     public float m_bulletLifeTime;
     public float m_bulletSpeed;
 
+    [SerializeField]
+    public int m_damage;
+
     Transform m_thisTransform;
     float m_time;
 
@@ -15,9 +18,10 @@ public class Bullet : MonoBehaviour
         m_time = 0f;
     }
 
-    private void OnEnable()
+    void Awake()
     {
         m_time = 0f;
+        m_damage = 3;
     }
 
     // Update is called once per frame
@@ -25,9 +29,9 @@ public class Bullet : MonoBehaviour
     {
         m_thisTransform.position = new Vector2(m_thisTransform.position.x - (m_bulletSpeed * Time.deltaTime), m_thisTransform.position.y);
         m_time += Time.deltaTime;
-        if(m_time > m_bulletLifeTime)
+        if (m_time > m_bulletLifeTime)
         {
-            this.gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 }

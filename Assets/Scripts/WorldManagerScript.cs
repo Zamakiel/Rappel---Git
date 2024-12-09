@@ -103,14 +103,14 @@ public class WorldManagerScript : MonoBehaviour
             else if (floorCounter == m_totalFloors - 1)
             {
                 floor = Instantiate(Resources.Load("Prefabs/BuildingRoofPrefab")) as GameObject;
-                floor.name = "Building Floor " + floorCounter;
+                floor.name = "Building Roof";
                 m_buildingRoofGameObject = floor;
                 m_craneAnchorPoint = m_buildingRoofGameObject.transform.GetChild(0).GetChild(0).gameObject;
             }
             else
             {
                 floor = Instantiate(Resources.Load("Prefabs/BuildingFloorPrefab")) as GameObject;
-                floor.name = "Building Roof";
+                floor.name = "Building Floor " + floorCounter;
                 m_buildingFloorGameObjects.Add(floor);
             }
 

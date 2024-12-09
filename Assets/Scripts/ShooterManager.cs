@@ -50,9 +50,9 @@ public class ShooterManager : MonoBehaviour
     public void Initialize()
     {
         m_canShoot = true;
+        m_gunPoint = PlayerScript.s_instance.transform.Find("Gunpoint").transform;
 
         m_initialized = true;
-        m_gunPoint = PlayerScript.s_instance.transform.Find("Gunpoint").transform;
         Debug.Log(this.GetType().ToString() + " Initialized!");
     }
 
@@ -61,23 +61,12 @@ public class ShooterManager : MonoBehaviour
         if (m_canShoot)
         {
             m_canShoot = false;
-            StartCoroutine(DebounceBullets());
-
-            if (m_bulletPool.Exists(x => !x.activeInHierarchy))
-            {
-                GameObject l_bullet = m_bulletPool.Find(x => !x.gameObject.activeInHierarchy);
-                l_bullet.transform.position = m_gunPoint.position;
-                l_bullet.SetActive(true);
-            }
-            else
-            {
-                GameObject l_bullet = Instantiate(m_bulletPrefab, m_gunPoint.position, Quaternion.identity);
-                m_bulletPool.Add(l_bullet);
-            }
+            GameObject l_bullet = Instantiate(m_bulletPrefab, m_gunPoint.position, Quaternion.identity);
+            StartCoroutine(GunCooldown());
         }
     }
 
-    IEnumerator DebounceBullets()
+    IEnumerator GunCooldown()
     {
         yield return new WaitForSeconds(m_shootingInterval);
         m_canShoot = true;
