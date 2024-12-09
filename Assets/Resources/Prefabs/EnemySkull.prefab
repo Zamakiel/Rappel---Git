@@ -14668,7 +14668,7 @@ MonoBehaviour:
   m_attackDamage: 0
   m_lifetimeMax: 55
   m_lifetimeCurrent: 0
-  m_particleSystem: {fileID: 7797926218202649965}
+  OnEnemyReachedTopEvent: {fileID: 11400000, guid: 09630b254ce01ea429ae2eb1f1d825eb, type: 2}
 --- !u!61 &488244370559213284
 BoxCollider2D:
   m_ObjectHideFlags: 0

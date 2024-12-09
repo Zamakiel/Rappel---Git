@@ -32,7 +32,6 @@ public class WorldManagerScript : MonoBehaviour
         {
             s_instance = this;
         }
-        DontDestroyOnLoad(this);
 
         if (!m_initialized)
         {

@@ -31,6 +31,9 @@ public class EnemyControllerScript : MonoBehaviour
     [SerializeField]
     float m_lifetimeCurrent;
 
+    [SerializeField]
+    GameEvent OnEnemyReachedTopEvent;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -59,7 +62,7 @@ public class EnemyControllerScript : MonoBehaviour
         {
             if (collision.gameObject.name.Contains("Roof"))
             {
-                PlayerScript.s_instance.m_onDealDamageToPlayerEvent.Invoke(m_attackDamage);
+                OnEnemyReachedTopEvent.Raise();
                 TerminateEnemy();
             }
 
