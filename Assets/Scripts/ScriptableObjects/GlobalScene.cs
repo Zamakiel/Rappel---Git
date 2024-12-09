@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 [CreateAssetMenu(fileName = "GlobalScene", menuName = "Scriptable Objects/GlobalScene")]
 public class GlobalScene : ScriptableObject
 {
-    public Object Value;
+    public string Value { get; set; }
 
     public void SetValue(Object obj)
     {
-        Value = obj;
+        //Value = obj;
     }
 }

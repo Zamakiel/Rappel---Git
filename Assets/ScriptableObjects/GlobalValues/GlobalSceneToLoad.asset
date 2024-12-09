@@ -10,6 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a13d32a7c761b9445af3c3780b33cd9b, type: 3}
-  m_Name: GlobalSceneToLoad
+  m_Name: GameScene
   m_EditorClassIdentifier: 
-  Value: {fileID: 0}

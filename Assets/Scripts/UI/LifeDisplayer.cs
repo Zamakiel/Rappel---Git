@@ -16,7 +16,6 @@ public class LifeDisplayer : MonoBehaviour
     void Update()
     {
         GetComponent<TextMeshProUGUI>().text = 
-            "Lives: " +
             currentHealth.Value.ToString() + 
             "/" + 
             totalHealth.Value.ToString();

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Pool;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class ShooterManager : MonoBehaviour
 {
