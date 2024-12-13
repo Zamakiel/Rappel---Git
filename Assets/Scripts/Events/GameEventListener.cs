@@ -22,6 +22,7 @@ public class GameEventListener : MonoBehaviour
 
     private void OnDisable()
     {
+        Debug.Log("Hello " + gameObject.name, this);
         Event.UnregisterListener(this);
     }
 

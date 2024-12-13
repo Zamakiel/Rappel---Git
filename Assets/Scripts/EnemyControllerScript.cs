@@ -60,6 +60,13 @@ public class EnemyControllerScript : MonoBehaviour
     {
         if (collision != null)
         {
+            NPCController nPCController = collision.GetComponent<NPCController>();  
+            if (nPCController != null)
+            {
+
+            }
+
+
             if (collision.gameObject.name.Contains("Roof"))
             {
                 OnEnemyReachedTopEvent.Raise();
